@@ -1,0 +1,30 @@
+{
+  "2020-01-20": {
+    "10:35": {
+      "gender": "male",
+      "age": 66,
+      "name": "李某某",
+      "detail": "死者李某某，男，66岁，2020年1月16日因“间断咳嗽，头痛，乏力伴发热6天”入院治疗；1月17日出现呼吸困难，1月20日10:35出现多器官功能衰竭，抢救无效死亡。死者生前有慢阻肺、高血压病、2型糖尿病、慢性肾功能不全等基础疾病。",
+      "location": "武汉",
+      "source": "https://web.archive.org/save/http://wjw.wuhan.gov.cn/front/web/showDetail/2020012109085"
+    },
+    "14:31": {
+      "gender": "female",
+      "age": 48,
+      "name": "殷某某",
+      "detail": "死者殷某某，女，48岁，2019年12月10日发病，12月27日出现呼吸困难，12月31日转入武汉市金银潭医院救治，入院时严重呼吸窘迫，2020年1月20日14:31出现多器官功能衰竭，抢救无效死亡。死者生前有糖尿病、脑梗死、胆结石等基础疾病。",
+      "location": "武汉",
+      "source": "https://web.archive.org/save/http://wjw.wuhan.gov.cn/front/web/showDetail/2020012109085"
+    }
+  },
+  "2020-01-19": {
+    "23:39": {
+      "gender": "male",
+      "age": 89,
+      "name": "陈某",
+      "detail": "死者陈某，男，89岁，2020年1月13日发病，1月18日因严重呼吸困难入院救治，1月19日23:39抢救无效死亡。患者有高血压、糖尿病、冠心病、频发室性早搏等基础疾病",
+      "location": "武汉",
+      "source": "https://web.archive.org/save/http://wjw.wuhan.gov.cn/front/web/showDetail/2020012109083"
+    }
+  }
+}
