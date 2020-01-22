@@ -1,5 +1,6 @@
 import { parse } from 'date-fns';
 import data from '../data.json';
+import '../style.css';
 const results = Object.entries(data).sort(function([dateA], [dateB]) {
   return new Date(dateB) - new Date(dateA);
 });
@@ -18,19 +19,10 @@ function RenderItems({ date, items }) {
 function RenderItem({ time, item }) {
   return (
     <div>
-      <h3
-        style={{
-          marginLeft: 100
-        }}
-      >
-        {time}
-      </h3>
-      <div
-        style={{
-          marginLeft: 140
-        }}
-      >
-        <strong>{item.name}</strong> {item.gender} {item.age} {item.location}
+      <h3 className="ml-10">{time}</h3>
+      <div className="ml-20">
+        <strong className="text-lg">{item.name}</strong> {item.gender}{' '}
+        {item.age} {item.location}
         <div>{item.detail}</div>
       </div>
     </div>
@@ -39,7 +31,7 @@ function RenderItem({ time, item }) {
 function HomePage() {
   return (
     <>
-      <h1>死亡线</h1>
+      <h1 className="text-2xl font-bold">死亡线</h1>
       <div>
         {results.map(([date, items]) => (
           <div key={date}>
