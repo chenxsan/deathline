@@ -9,8 +9,8 @@
     "start": "next start"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Sam Chen",
+  "license": "MIT",
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "date-fns": "^2.9.0",
