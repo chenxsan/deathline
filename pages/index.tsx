@@ -1,44 +1,55 @@
-import { parse } from 'date-fns';
-import data from '../data.json';
+import Head from 'next/head';
+
 import '../style.css';
+
+import data from '../data.json';
+
+import RenderDate from '../components/RenderDate';
+
 const results = Object.entries(data).sort(function([dateA], [dateB]) {
-  return new Date(dateB) - new Date(dateA);
+  return new Date(dateB).getTime() - new Date(dateA).getTime();
 });
-function RenderItems({ date, items }) {
-  const formatString = 'yyyy-MM-dd HH:mm';
-  const results = Object.entries(items).sort(function([timeA], [timeB]) {
-    return (
-      parse(`${date} ${timeB}`, formatString, new Date()) -
-      parse(`${date} ${timeA}`, formatString, new Date())
-    );
-  });
-  return results.map(([time, item]) => (
-    <RenderItem time={time} item={item} key={time} />
-  ));
+
+type Gender = 'female' | 'male';
+interface Item {
+  name: string;
+  gender: Gender;
+  age: number;
+  location: string;
+  detail: string;
 }
-function RenderItem({ time, item }) {
-  return (
-    <div>
-      <h3 className="ml-10">{time}</h3>
-      <div className="ml-20">
-        <strong className="text-lg">{item.name}</strong> {item.gender}{' '}
-        {item.age} {item.location}
-        <div>{item.detail}</div>
-      </div>
-    </div>
-  );
-}
+
 function HomePage() {
   return (
     <>
-      <h1 className="text-2xl font-bold">死亡线</h1>
-      <div>
-        {results.map(([date, items]) => (
-          <div key={date}>
-            <h2>{date}</h2>
-            <RenderItems date={date} items={items} />
-          </div>
-        ))}
+      <Head>
+        <title>武汉肺炎</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div className="container mx-auto">
+        <h1 className="text-4xl font-bold pt-4">武汉肺炎死亡时间线</h1>
+        <h2 className="pb-4">
+          目前已确认{' '}
+          {
+            results
+              .reduce((acc, [_, cur]) => acc.concat(Object.values(cur)), [])
+              .reduce((acc, cur) => acc.concat(cur), []).length
+          }{' '}
+          例死亡
+        </h2>
+        <div>
+          {results.map(([date, items]) => (
+            <div key={date} className="mb-10">
+              <h2 className="text-xl bg-black text-white flex items-center">
+                {date}
+                <span className="ml-auto mr-2">
+                  共{Object.keys(items).length}例
+                </span>
+              </h2>
+              <RenderDate date={date} items={items} />
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
