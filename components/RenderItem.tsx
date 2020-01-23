@@ -21,7 +21,7 @@ function RenderItem({ item }: Props) {
     <div className="ml-4">
       <div>
         <strong className="text-2xl">{item.name}</strong>{' '}
-        {returnGenderInChinese(item.gender)} [{item.location}]
+        {returnGenderInChinese(item.gender)} [{item.location.join('‧')}]
       </div>
       <div
         className="bg-gray-300"

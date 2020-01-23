@@ -12,7 +12,7 @@ export interface Item {
   name: string;
   gender: Gender;
   age: number;
-  location: string;
+  location: string[];
   detail: string;
   source: string;
 }
