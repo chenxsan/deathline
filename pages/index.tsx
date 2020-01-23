@@ -40,7 +40,7 @@ function HomePage() {
         <div>
           {results.map(([date, items]) => (
             <div key={date} className="mb-10">
-              <h2 className="text-xl bg-black text-white flex items-center">
+              <h2 className="text-xl bg-black text-white flex items-center sticky top-0">
                 {date}
                 <span className="ml-auto mr-2">
                   共{Object.keys(items).length}例
