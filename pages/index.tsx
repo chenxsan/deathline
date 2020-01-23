@@ -1,3 +1,4 @@
+import { NextPage } from 'next';
 import Head from 'next/head';
 
 import '../style.css';
@@ -6,20 +7,53 @@ import data from '../data.json';
 
 import RenderDate from '../components/RenderDate';
 
-const results = Object.entries(data).sort(function([dateA], [dateB]) {
-  return new Date(dateB).getTime() - new Date(dateA).getTime();
-});
-
-type Gender = 'female' | 'male';
-interface Item {
+export type Gender = 'female' | 'male';
+export interface Item {
   name: string;
   gender: Gender;
   age: number;
   location: string;
   detail: string;
+  source: string;
 }
 
-function HomePage() {
+interface Data {
+  [date: string]: {
+    [time: string]: Item[];
+  };
+}
+
+type DateTurple = [
+  string,
+  {
+    [time: string]: Item[];
+  }
+];
+type SortedResults = DateTurple[];
+
+function sortDataByDate(data: Data) {
+  return Object.entries(data).sort(function([dateA], [dateB]) {
+    return new Date(dateB).getTime() - new Date(dateA).getTime();
+  });
+}
+
+function flat(arr: SortedResults): Item[] {
+  return arr
+    .reduce((acc, [_, cur]) => acc.concat(Object.values(cur)), [])
+    .reduce((acc, cur) => acc.concat(cur), []);
+}
+
+function len(data: Item[]): number {
+  return data.length;
+}
+
+// cast type
+const d: Data = data as Data;
+
+// sort data
+const results: SortedResults = sortDataByDate(d);
+
+const HomePage: NextPage = () => {
   return (
     <>
       <Head>
@@ -28,15 +62,7 @@ function HomePage() {
       </Head>
       <div className="container mx-auto">
         <h1 className="text-4xl font-bold pt-4">武汉肺炎死亡时间线</h1>
-        <h2 className="pb-4">
-          目前已确认{' '}
-          {
-            results
-              .reduce((acc, [_, cur]) => acc.concat(Object.values(cur)), [])
-              .reduce((acc, cur) => acc.concat(cur), []).length
-          }{' '}
-          例死亡
-        </h2>
+        <h2 className="pb-4">目前已确认 {len(flat(results))} 例死亡</h2>
         <div>
           {results.map(([date, items]) => (
             <div key={date} className="mb-10">
@@ -53,5 +79,5 @@ function HomePage() {
       </div>
     </>
   );
-}
+};
 export default HomePage;

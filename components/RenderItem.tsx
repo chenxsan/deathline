@@ -1,4 +1,8 @@
-function returnGenderInChinese(gender) {
+import { Item, Gender } from '../pages/index';
+interface getGender {
+  (gender: Gender): string;
+}
+const returnGenderInChinese: getGender = function(gender) {
   switch (gender) {
     case 'male':
       return '男';
@@ -7,8 +11,12 @@ function returnGenderInChinese(gender) {
     default:
       return '其他';
   }
+};
+interface Props {
+  item: Item;
 }
-function RenderItem({ time, item }) {
+
+function RenderItem({ item }: Props) {
   return (
     <div className="ml-4">
       <div>

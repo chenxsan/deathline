@@ -1,7 +1,17 @@
 import { parse } from 'date-fns';
 import RenderTime from './RenderTime';
-function RenderDate({ date, items }) {
-  const formatString = 'yyyy-MM-dd HH:mm';
+import { Item } from '../pages/index';
+
+interface Props {
+  date: string;
+  items: any;
+}
+
+type TimeArr = [string, Item[]];
+
+const formatString = 'yyyy-MM-dd HH:mm';
+
+function RenderDate({ date, items }: Props) {
   const results = Object.entries(items).sort(function([timeA], [timeB]) {
     return (
       parse(`${date} ${timeB}`, formatString, new Date()).getTime() -
@@ -10,7 +20,7 @@ function RenderDate({ date, items }) {
   });
   return (
     <div>
-      {results.map(([time, items]) => (
+      {results.map(([time, items]: TimeArr) => (
         <RenderTime time={time} items={items} key={time} />
       ))}
     </div>
