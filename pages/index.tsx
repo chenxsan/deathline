@@ -6,6 +6,7 @@ import '../style.css';
 import data from '../data.json';
 
 import RenderDate from '../components/RenderDate';
+import ScrollTop from '../components/ScrollTop';
 
 export type Gender = 'female' | 'male';
 export interface Item {
@@ -77,6 +78,7 @@ const HomePage: NextPage = () => {
           ))}
         </div>
       </div>
+      <ScrollTop />
     </>
   );
 };
