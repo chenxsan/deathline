@@ -9,7 +9,7 @@ const returnGenderInChinese: getGender = function(gender) {
     case 'female':
       return '女';
     default:
-      return '其他';
+      return '未知';
   }
 };
 interface Props {
