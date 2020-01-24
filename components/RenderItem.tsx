@@ -20,7 +20,7 @@ function RenderItem({ item }: Props) {
   return (
     <div className="ml-4">
       <div>
-        <strong className="text-2xl">{item.name}</strong>{' '}
+        <strong className="text-2xl">{item.name || '?'}</strong>{' '}
         {returnGenderInChinese(item.gender)} [{item.location.join('‧')}]
       </div>
       <div
@@ -29,7 +29,7 @@ function RenderItem({ item }: Props) {
           width: `${item.age}%`
         }}
       >
-        年龄：{item.age}
+        年龄：{item.age || '?'}
       </div>
       <div>{item.detail}</div>
       <div>
