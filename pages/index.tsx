@@ -79,6 +79,9 @@ const HomePage: NextPage = () => {
         </div>
       </div>
       <ScrollTop />
+      <div className="text-center text-base text-gray-800 py-2">
+        Built at {process.env.buildAt}
+      </div>
     </>
   );
 };
