@@ -10,6 +10,7 @@ import ScrollTop from '../components/ScrollTop';
 
 export type Gender = 'female' | 'male';
 export interface Item {
+  id: number;
   name?: string;
   gender?: Gender;
   age?: number;

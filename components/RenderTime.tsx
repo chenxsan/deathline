@@ -10,7 +10,7 @@ function RenderTime({ time, items }: Props) {
       <h3 className="ml-10">{time}</h3>
       <div className="ml-20">
         {items.map((item: Item) => (
-          <RenderItem item={item} key={item.name} />
+          <RenderItem item={item} key={item.id} />
         ))}
       </div>
     </div>
