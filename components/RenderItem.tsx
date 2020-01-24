@@ -23,14 +23,7 @@ function RenderItem({ item }: Props) {
         <strong className="text-2xl">{item.name || '?'}</strong>{' '}
         {returnGenderInChinese(item.gender)} [{item.location.join('‧')}]
       </div>
-      <div
-        className="bg-gray-300"
-        style={{
-          width: `${item.age}%`
-        }}
-      >
-        年龄：{item.age || '?'}
-      </div>
+      <div>年龄：{item.age || '?'}</div>
       <div>{item.detail}</div>
       <div>
         <a href={item.source} className="underline text-blue-500">
