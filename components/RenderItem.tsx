@@ -26,7 +26,10 @@ function RenderItem({ item }: Props) {
       <div>年龄：{item.age || '?'}</div>
       <div>{item.detail}</div>
       <div>
-        <a href={item.source} className="underline text-blue-500">
+        <a
+          href={item.source}
+          className="underline text-blue-700 hover:text-blue-800"
+        >
           source
         </a>
       </div>
