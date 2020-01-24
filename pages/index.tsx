@@ -65,10 +65,11 @@ const HomePage: NextPage = () => {
         <h1 className="text-4xl font-bold py-4 sm:text-5xl">
           武汉肺炎死亡时间线
         </h1>
-        <h2 className="pb-4">
-          目前已确认 {len(flat(results))} 例死亡；页面更新时间：
+        <h2 className="">目前已确认 {len(flat(results))} 例死亡</h2>
+        <h3 className="pb-4">
+          页面更新于：
           {process.env.buildAt}
-        </h2>
+        </h3>
         <div>
           {results.map(([date, items]) => (
             <div key={date} className="mb-10">
