@@ -61,9 +61,14 @@ const HomePage: NextPage = () => {
         <title>武汉肺炎</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="container mx-auto">
-        <h1 className="text-4xl font-bold pt-4">武汉肺炎死亡时间线</h1>
-        <h2 className="pb-4">目前已确认 {len(flat(results))} 例死亡</h2>
+      <div>
+        <h1 className="text-4xl font-bold py-4 sm:text-5xl">
+          武汉肺炎死亡时间线
+        </h1>
+        <h2 className="pb-4">
+          目前已确认 {len(flat(results))} 例死亡；页面更新时间：
+          {process.env.buildAt}
+        </h2>
         <div>
           {results.map(([date, items]) => (
             <div key={date} className="mb-10">
@@ -79,9 +84,6 @@ const HomePage: NextPage = () => {
         </div>
       </div>
       <ScrollTop />
-      <div className="text-center text-base text-gray-800 py-2">
-        Built at {process.env.buildAt}
-      </div>
     </>
   );
 };
