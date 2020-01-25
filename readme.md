@@ -9,3 +9,5 @@
 ## 数据更新
 
 见 [data.json](./data.json) 文件。
+
+目前数据都是手动添加。由于手动添加出错的概率极大，所以除了用于展示的首页外，另有一个[页面](https://deathline.now.sh/create)用于生成 JSON 结构的数据。
