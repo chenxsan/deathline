@@ -8,6 +8,7 @@ import { ChangeEvent } from 'react';
 
 import { Source } from '../data';
 import Preview from '../components/Preview';
+import countries from '../countries.json';
 
 const CreatePage: NextPage = () => {
   const [current, send] = useMachine(dataMachine);
@@ -130,27 +131,45 @@ const CreatePage: NextPage = () => {
               value={current.context.location[0]}
               onChange={e => {
                 const next = produce(current.context.location, draft => {
-                  draft[0] = e.target.value;
+                  const country = e.target.value;
+                  const province = Object.keys(countries[e.target.value])[0];
+                  const city = countries[province][0];
+                  draft[0] = country;
+                  draft[1] = province;
+                  draft[2] = city;
                 });
                 changeLocation(next);
               }}
               className="mr-1"
             >
-              <option value="中国">中国</option>
+              {Object.keys(countries).map(country => {
+                return (
+                  <option value={country} key={country}>
+                    {country}
+                  </option>
+                );
+              })}
             </select>
             <select
               value={current.context.location[1]}
               onChange={e => {
                 const next = produce(current.context.location, draft => {
-                  draft[1] = e.target.value;
+                  const province = e.target.value;
+                  draft[1] = province;
+                  draft[2] =
+                    countries[current.context.location[0]][province][0];
                 });
                 changeLocation(next);
               }}
               className="mr-1"
             >
-              <option value="湖北省">湖北省</option>
-              <option value="河北省">河北省</option>
-              <option value="黑龙江省">黑龙江省</option>
+              {Object.keys(countries[current.context.location[0]]).map(
+                province => (
+                  <option value={province} key={province}>
+                    {province}
+                  </option>
+                )
+              )}
             </select>
             <select
               value={current.context.location[2]}
@@ -161,7 +180,13 @@ const CreatePage: NextPage = () => {
                 changeLocation(next);
               }}
             >
-              <option value="武汉市">武汉市</option>
+              {countries[current.context.location[0]][
+                current.context.location[1]
+              ].map((city: string) => (
+                <option value={city} key={city}>
+                  {city}
+                </option>
+              ))}
             </select>
           </div>
           <div className="my-2">
