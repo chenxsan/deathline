@@ -9,6 +9,10 @@ import RenderDate from '../components/RenderDate';
 import ScrollTop from '../components/ScrollTop';
 
 export type Gender = 'female' | 'male';
+interface Source {
+  name: string;
+  url: string;
+}
 export interface Item {
   id: number;
   name?: string;
@@ -16,7 +20,7 @@ export interface Item {
   age?: number;
   location: string[];
   detail?: string;
-  source: string;
+  source: Source;
 }
 
 interface Data {

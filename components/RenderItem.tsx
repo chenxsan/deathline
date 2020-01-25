@@ -34,10 +34,10 @@ function RenderItem({ item }: Props) {
       <div className="flex">
         <span className="font-bold flex-shrink-0">来源：</span>
         <a
-          href={item.source}
+          href={item.source.url}
           className="underline text-blue-700 hover:text-blue-800"
         >
-          source
+          {item.source.name}
         </a>
       </div>
     </div>
