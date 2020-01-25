@@ -1,5 +1,5 @@
 import data from './data.json';
-export type Gender = 'female' | 'male';
+export type Gender = 'female' | 'male' | 'other';
 export interface Source {
   name: string;
   url: string;
