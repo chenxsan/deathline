@@ -3,31 +3,12 @@ import Head from 'next/head';
 
 import '../style.css';
 
-import data from '../data.json';
+import data from '../data';
 
 import RenderDate from '../components/RenderDate';
 import ScrollTop from '../components/ScrollTop';
 
-export type Gender = 'female' | 'male';
-interface Source {
-  name: string;
-  url: string;
-}
-export interface Item {
-  id: number;
-  name?: string;
-  gender?: Gender;
-  age?: number;
-  location: string[];
-  detail?: string;
-  source: Source;
-}
-
-interface Data {
-  [date: string]: {
-    [time: string]: Item[];
-  };
-}
+import { Item, Data } from '../data';
 
 type DateTurple = [
   string,
@@ -37,27 +18,24 @@ type DateTurple = [
 ];
 type SortedResults = DateTurple[];
 
-function sortDataByDate(data: Data) {
+export function sortDataByDate(data: Data) {
   return Object.entries(data).sort(function([dateA], [dateB]) {
     return new Date(dateB).getTime() - new Date(dateA).getTime();
   });
 }
 
-function flat(arr: SortedResults): Item[] {
+export function flat(arr: SortedResults): Item[] {
   return arr
     .reduce((acc, [_, cur]) => acc.concat(Object.values(cur)), [])
     .reduce((acc, cur) => acc.concat(cur), []);
 }
 
-function len(data: Item[]): number {
+export function len(data: Item[]): number {
   return data.length;
 }
 
-// cast type
-const d: Data = data as Data;
-
 // sort data
-const results: SortedResults = sortDataByDate(d);
+const results: SortedResults = sortDataByDate(data);
 
 const HomePage: NextPage = () => {
   return (

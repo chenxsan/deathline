@@ -1,4 +1,4 @@
-import { Item, Gender } from '../pages/index';
+import { Item, Gender } from '../data';
 interface getGender {
   (gender: Gender): string;
 }

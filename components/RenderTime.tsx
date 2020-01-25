@@ -1,5 +1,5 @@
 import RenderItem from './RenderItem';
-import { Item } from '../pages/index';
+import { Item } from '../data';
 interface Props {
   time: string;
   items: any;

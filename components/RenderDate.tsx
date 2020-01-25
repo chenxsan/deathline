@@ -1,6 +1,6 @@
 import { parse } from 'date-fns';
 import RenderTime from './RenderTime';
-import { Item } from '../pages/index';
+import { Item } from '../data';
 
 interface Props {
   date: string;
