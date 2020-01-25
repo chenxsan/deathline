@@ -23,9 +23,16 @@ function RenderItem({ item }: Props) {
         <strong className="text-2xl">{item.name || '?'}</strong>{' '}
         {returnGenderInChinese(item.gender)} [{item.location.join('‧')}]
       </div>
-      <div>年龄：{item.age || '?'}</div>
-      <div>{item.detail}</div>
-      <div>
+      <div className="flex">
+        <span className="font-bold flex-shrink-0">年龄：</span>
+        {item.age || '?'}
+      </div>
+      <div className="flex">
+        <span className="font-bold flex-shrink-0">详情：</span>
+        {item.detail}
+      </div>
+      <div className="flex">
+        <span className="font-bold flex-shrink-0">来源：</span>
         <a
           href={item.source}
           className="underline text-blue-700 hover:text-blue-800"
