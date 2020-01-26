@@ -7,6 +7,7 @@ import data from '../data';
 
 import RenderDate from '../components/RenderDate';
 import ScrollTop from '../components/ScrollTop';
+import Chart from '../components/Chart';
 
 import { Item, Data } from '../data';
 
@@ -40,11 +41,7 @@ const results: SortedResults = sortDataByDate(data);
 const HomePage: NextPage = () => {
   return (
     <>
-      <Head>
-        <title>武汉肺炎</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-      <div>
+      <header>
         <h1 className="text-4xl font-bold py-4 sm:text-5xl">
           武汉肺炎死亡时间线
         </h1>
@@ -52,23 +49,40 @@ const HomePage: NextPage = () => {
         <h3 className="pb-4">
           页面更新于：
           {process.env.buildAt}；
-          <a href="https://github.com/chenxsan/deathline" className="underline">
+          <a
+            href="https://github.com/chenxsan/deathline"
+            className="underline text-blue-700 hover:text-blue-800"
+          >
             查看源代码
           </a>
         </h3>
-        <div>
-          {results.map(([date, items]) => (
-            <div key={date} className="mb-10">
-              <h2 className="text-xl bg-black text-white flex items-center sticky top-0 py-2">
-                {date}
-                <span className="ml-auto mr-2">
-                  共{Object.keys(items).length}例
-                </span>
-              </h2>
-              <RenderDate date={date} items={items} />
-            </div>
-          ))}
-        </div>
+      </header>
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-6">
+        <Head>
+          <title>武汉肺炎</title>
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
+        </Head>
+        <main className="order-last lg:order-first">
+          <div>
+            {results.map(([date, items]) => (
+              <div key={date} className="mb-20">
+                <h2 className="shadow text-xl border-4 border-l-0 border-r-0 border-b-0 bg-gray-100 border-black flex items-center sticky top-0 py-2">
+                  {date}
+                  <span className="ml-auto mr-2">
+                    共{Object.keys(items).length}例
+                  </span>
+                </h2>
+                <RenderDate date={date} items={items} />
+              </div>
+            ))}
+          </div>
+        </main>
+        <aside className="order-first lg:order-last">
+          <Chart />
+        </aside>
       </div>
       <footer className="mb-10">
         <ScrollTop />
