@@ -171,23 +171,26 @@ const CreatePage: NextPage = () => {
                 )
               )}
             </select>
-            <select
-              value={current.context.location[2]}
-              onChange={e => {
-                const next = produce(current.context.location, draft => {
-                  draft[2] = e.target.value;
-                });
-                changeLocation(next);
-              }}
-            >
-              {countries[current.context.location[0]][
-                current.context.location[1]
-              ].map((city: string) => (
-                <option value={city} key={city}>
-                  {city}
-                </option>
-              ))}
-            </select>
+            {countries[current.context.location[0]][current.context.location[1]]
+              .length > 0 && (
+              <select
+                value={current.context.location[2]}
+                onChange={e => {
+                  const next = produce(current.context.location, draft => {
+                    draft[2] = e.target.value;
+                  });
+                  changeLocation(next);
+                }}
+              >
+                {countries[current.context.location[0]][
+                  current.context.location[1]
+                ].map((city: string) => (
+                  <option value={city} key={city}>
+                    {city}
+                  </option>
+                ))}
+              </select>
+            )}
           </div>
           <div className="my-2">
             <label htmlFor="detail" className="w-24 text-right inline-block">

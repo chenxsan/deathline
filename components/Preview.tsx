@@ -11,6 +11,10 @@ interface Props {
   current: any;
 }
 function Preview({ ctx, copy, current, close }: Props) {
+  let location = [ctx.location[0], ctx.location[1]]
+  if (ctx.location[2]) {
+    location = [...location, ctx.location[2]]
+  }
   const txt = `
   "${ctx.date}": {
     "${ctx.time}": [
@@ -20,9 +24,7 @@ function Preview({ ctx, copy, current, close }: Props) {
         "age": ${ctx.age},
         "gender": "${ctx.gender}",
         "detail": "${ctx.detail}",
-        "location": ["${ctx.location[0]}", "${ctx.location[1]}", "${
-    ctx.location[2]
-  }"],
+        "location": ${JSON.stringify(location)},
         "source": {
           "name": "${ctx.source.name}",
           "url": "${ctx.source.url}"
