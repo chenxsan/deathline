@@ -51,7 +51,10 @@ const HomePage: NextPage = () => {
         <h2 className="">目前已确认 {len(flat(results))} 例死亡</h2>
         <h3 className="pb-4">
           页面更新于：
-          {process.env.buildAt}
+          {process.env.buildAt}；
+          <a href="https://github.com/chenxsan/deathline" className="underline">
+            查看源代码
+          </a>
         </h3>
         <div>
           {results.map(([date, items]) => (
@@ -67,7 +70,9 @@ const HomePage: NextPage = () => {
           ))}
         </div>
       </div>
-      <ScrollTop />
+      <footer className="mb-10">
+        <ScrollTop />
+      </footer>
     </>
   );
 };
