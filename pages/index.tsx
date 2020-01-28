@@ -47,8 +47,7 @@ const HomePage: NextPage = () => {
         </h1>
         <h2 className="">目前已确认 {len(flat(results))} 例死亡</h2>
         <h3 className="pb-4">
-          页面更新于：
-          {process.env.buildAt}；
+          数据更新至 2020-01-25；
           <a
             href="https://github.com/chenxsan/deathline"
             className="underline text-blue-700 hover:text-blue-800"
