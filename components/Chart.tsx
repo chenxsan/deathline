@@ -7,7 +7,7 @@ const dates: string[] = Object.keys(data).sort((a, b) => {
 });
 
 const statistic: number[] = dates
-  .map(date => Object.values(data[date]).flat())
+  .map(date => Object.values(data[date]).reduce((acc, cur) => acc.concat(cur)))
   .map(arr => arr.length);
 
 function Chart() {
