@@ -1,7 +1,7 @@
-import { scaleOrdinal, scaleLinear, scaleBand, scaleTime } from 'd3-scale';
+import { scaleOrdinal, scaleLinear, scaleBand } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
-import { max, extent } from 'd3-array';
-import { useState, useEffect, useRef } from 'react';
+import { max } from 'd3-array';
+import { useState, useEffect, useRef, useMemo } from 'react';
 
 StackedBar.defaultProps = {
   data: {
@@ -74,26 +74,39 @@ export default function StackedBar(props: Props) {
     window.addEventListener('resize', handler);
     return () => window.removeEventListener('resize', handler);
   }, []);
-  const colors = scaleOrdinal()
-    .domain(data.series.map(d => d.name))
-    .range(schemeCategory10);
+
+  const colors = useMemo(
+    () =>
+      scaleOrdinal()
+        .domain(data.series.map(d => d.name))
+        .range(schemeCategory10),
+    [data.series]
+  );
 
   const arr = data.series.map(serie => serie.data);
 
   // find the max stacked value
-  const maxStackedValue = calculateMaxStackedValue(arr);
+  const maxStackedValue = useMemo(() => calculateMaxStackedValue(arr), [arr]);
 
   const boundaryY = height - inset.top - inset.bottom;
   const boundaryX = width - inset.left - inset.right;
 
-  const yScale = scaleLinear()
-    .domain([maxStackedValue, 0])
-    .range([0, boundaryY]);
+  const yScale = useMemo(
+    () =>
+      scaleLinear()
+        .domain([maxStackedValue, 0])
+        .range([0, boundaryY]),
+    [maxStackedValue, boundaryY]
+  );
 
-  const xScale = scaleBand()
-    .domain(data.xAxis.categories)
-    .range([0, boundaryX])
-    .padding(0.3);
+  const xScale = useMemo(
+    () =>
+      scaleBand()
+        .domain(data.xAxis.categories)
+        .range([0, boundaryX])
+        .padding(0.3),
+    [data.xAxis.categories, boundaryX]
+  );
 
   return (
     <section ref={ref}>
