@@ -1,7 +1,9 @@
 import { scaleOrdinal, scaleLinear, scaleBand } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { max } from 'd3-array';
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useMemo } from 'react';
+import { ResizeObserver } from '@juggle/resize-observer';
+import useMeasure from 'react-use-measure';
 
 StackedBar.defaultProps = {
   data: {
@@ -54,26 +56,9 @@ export default function StackedBar(props: Props) {
 
   if (data.series.length === 0) return null;
 
-  const [width, setWidth] = useState(0);
   const [height] = useState(props.height);
 
-  const ref = useRef(null);
-  useEffect(() => {
-    if (ref.current) {
-      const { width } = ref.current.getBoundingClientRect();
-      setWidth(width);
-    }
-  }, [ref]);
-  useEffect(() => {
-    function handler() {
-      if (ref.current) {
-        const { width } = ref.current.getBoundingClientRect();
-        setWidth(width);
-      }
-    }
-    window.addEventListener('resize', handler);
-    return () => window.removeEventListener('resize', handler);
-  }, []);
+  const [ref, { width }] = useMeasure({ polyfill: ResizeObserver });
 
   const colors = useMemo(
     () =>
