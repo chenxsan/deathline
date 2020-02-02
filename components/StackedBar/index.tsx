@@ -1,9 +1,10 @@
 import { scaleOrdinal, scaleLinear, scaleBand } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import { max } from 'd3-array';
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ResizeObserver } from '@juggle/resize-observer';
 import useMeasure from 'react-use-measure';
+import { AxisBottom, AxisLeft } from '../Axis/';
 
 StackedBar.defaultProps = {
   data: {
@@ -23,6 +24,12 @@ interface Serie {
   name: string;
   data: number[];
 }
+export interface Inset {
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+}
 interface Props {
   height: number; // svg height
   data: {
@@ -32,12 +39,7 @@ interface Props {
     };
     title: string;
   };
-  inset: {
-    top: number;
-    bottom: number;
-    left: number;
-    right: number;
-  };
+  inset: Inset;
 }
 
 function calculateMaxStackedValue(arr: number[][]): number {
@@ -51,6 +53,7 @@ function calculateMaxStackedValue(arr: number[][]): number {
     )
   );
 }
+
 export default function StackedBar(props: Props) {
   const { data, inset } = props;
 
@@ -92,7 +95,6 @@ export default function StackedBar(props: Props) {
         .padding(0.3),
     [data.xAxis.categories, boundaryX]
   );
-
   return (
     <section ref={ref}>
       <header>
@@ -110,6 +112,14 @@ export default function StackedBar(props: Props) {
         ))}
       </header>
       <svg width={width} height={height}>
+        <AxisLeft
+          scale={yScale}
+          transform={`translate(${inset.left}, ${inset.top})`}
+        />
+        <AxisBottom
+          scale={xScale}
+          transform={`translate(${inset.left}, ${height - inset.top})`}
+        />
         <g transform={`translate(${inset.left}, ${inset.top})`}>
           {data.series.map(({ name, data: d }, index) => {
             return d.map((x, idx) => {
