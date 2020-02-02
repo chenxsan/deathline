@@ -19,15 +19,15 @@ type DateTurple = [
 ];
 type SortedResults = DateTurple[];
 
-export function sortDataByDate(data: Data) {
+export function sortDataByDate(data: Data): SortedResults {
   return Object.entries(data).sort(function([dateA], [dateB]) {
     return new Date(dateB).getTime() - new Date(dateA).getTime();
   });
 }
-
+const acc: Item[][] = [];
 export function flat(arr: SortedResults): Item[] {
   return arr
-    .reduce((acc, [_, cur]) => acc.concat(Object.values(cur)), [])
+    .reduce((acc, [_, cur]) => acc.concat(Object.values(cur)), acc)
     .reduce((acc, cur) => acc.concat(cur), []);
 }
 
