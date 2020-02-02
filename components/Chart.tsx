@@ -107,7 +107,7 @@ function Chart() {
     <Suspense fallback={<div>loading</div>}>
       <div className="mb-2 lg:mb-0 ml-2 lg:ml-2 sticky top-0">
         {/* <StackedBar data={data} /> */}
-        <StackedBar data={d} />
+        <StackedBar data={d} height={500} />
       </div>
     </Suspense>
   );
