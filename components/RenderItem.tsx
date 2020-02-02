@@ -17,11 +17,12 @@ interface Props {
 }
 
 function RenderItem({ item }: Props) {
+  const { gender = 'other' } = item;
   return (
     <div className="ml-4">
       <div>
         <strong className="text-2xl">{item.name || '?'}</strong>{' '}
-        {returnGenderInChinese(item.gender)} [{item.location.join('‧')}]
+        {returnGenderInChinese(gender)} [{item.location.join('‧')}]
       </div>
       <div className="flex">
         <span className="font-bold flex-shrink-0">年龄：</span>
